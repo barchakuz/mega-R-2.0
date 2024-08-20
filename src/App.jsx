@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { login, logout } from '../store/authSlice'; 
 import authService from '../appwrite/auth';
 import {Header, Footer} from './components/index'
+import { Outlet } from 'react-router-dom';
 
 
 
@@ -26,7 +27,7 @@ function App() {
     <>
       <Header />
       <main>
-        Todo
+        <Outlet />
       </main>
     <Footer />
     </>

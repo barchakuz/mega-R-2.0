@@ -4,10 +4,10 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 
-function Protected({childern , authentication = true }) {
+export function Protected({childern , authentication = true }) {
     const [loader, setLoader] = useState( true);
     const navigate = useNavigate()
-    const authStatus = useSelector((state)=> this.state = state.auth.status);
+    const authStatus = useSelector((state)=> state = state.auth.status);
 
     useEffect(()=>{
         if (authentication && authStatus !== authentication) {
@@ -21,5 +21,3 @@ function Protected({childern , authentication = true }) {
 
   return loader? <h1>Loading</h1> : <>{childern}</>
 }
-
-export default Protected
