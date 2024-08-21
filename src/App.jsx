@@ -3,9 +3,10 @@ import './index.css';
 import { useDispatch } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import { login, logout } from '../store/authSlice'; 
-import authService from '../appwrite/auth';
-import {Header, Footer} from './components/index'
+import authService from '../appwrite/auth.js';
+import {Header, Footer} from './components/index.js'
 import { Outlet } from 'react-router-dom';
+
 
 
 
@@ -17,8 +18,11 @@ function App() {
     authService.getCurrentuser().then((userData) => {
       if (userData) {
         dispatch(login({ userData }));
+        console.log("User status Set");
+        
       } else {
         dispatch(logout());
+        console.log("User status UnSet");
       }
     }).finally(() => setLoading(false));
   }, []);
