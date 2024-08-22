@@ -43,7 +43,11 @@ const router = createBrowserRouter([
                         {" "}
                         <AllPost />
                     </AuthLayout>
-                )
+                ),
+                children : [
+                    
+                ]
+
             },
             {
                 path: "/add-post",
@@ -64,7 +68,7 @@ const router = createBrowserRouter([
                 ),
             },
             {
-                path: "/post/:slug",
+                path: "/all-posts/post/:slug",
                 element: <Post />,
             },
         ]

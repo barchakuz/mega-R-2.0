@@ -18,11 +18,9 @@ function App() {
     authService.getCurrentuser().then((userData) => {
       if (userData) {
         dispatch(login({ userData }));
-        console.log("User status Set");
         
       } else {
         dispatch(logout());
-        console.log("User status UnSet");
       }
     }).finally(() => setLoading(false));
   }, []);

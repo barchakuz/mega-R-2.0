@@ -1,30 +1,44 @@
-import React,{useState, useEffect} from 'react'
-import Container from '../container/Container'
+import React, { useState, useEffect } from 'react';
+import Container from '../container/Container';
+import service from '../../../appwrite/confg';
 import PostCard from '../PostCard'
-import appwriteService from '../../../appwrite/confg'
-
 
 function AllPost() {
-    const [posts , setPosts] = useState();
-    useEffect(()=>{},[])
-    appwriteService.getPosts([]).then((posts)=>{
-        if (posts) {
-            setPosts(posts)
-        }
-    })
-  return (
-    <div className='py-8'>
-        <Container>
-            <div className='flex flex-wrap'>
-                    {posts.map((post)=>{
-                        <div key={post.$id} className='p-2 w-1/4'>
-                            <PostCard {...post} />
-                        </div>
-                    })}
-            </div>
-        </Container>
-    </div>
-  )
+    const [posts, setPosts] = useState([]);  // Initialize as an empty array
+
+    useEffect(() => {
+        service.getPosts([]).then((data) => {
+            console.log(data.documents);
+            
+            if (data && data.documents) {
+                setPosts(data.documents);
+            } else {
+                console.log("No Post Found");
+                setPosts([]);
+            }
+        }).catch((error) => {
+            console.error("Error fetching posts:", error);
+            setPosts([]);
+        });
+    }, []);
+
+    return (
+        <div className='py-8'>
+            <Container>
+                <div className='flex flex-wrap'>
+                    {posts.length > 0 ? (
+                        posts.map((post) => (
+                            <div key={post.$id} className='p-2 w-1/4'>
+                                <PostCard  {...post} />
+                            </div>
+                        ))
+                    ) : (
+                        <p>No posts found.</p>
+                    )}
+                </div>
+            </Container>
+        </div>
+    );
 }
 
-export default AllPost
+export default AllPost;
