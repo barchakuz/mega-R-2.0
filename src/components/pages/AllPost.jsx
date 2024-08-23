@@ -8,7 +8,6 @@ function AllPost() {
 
     useEffect(() => {
         service.getPosts([]).then((data) => {
-            console.log(data.documents);
             
             if (data && data.documents) {
                 setPosts(data.documents);

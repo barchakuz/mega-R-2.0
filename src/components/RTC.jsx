@@ -1,6 +1,7 @@
 import React from 'react'
 import { Editor } from '@tinymce/tinymce-react'
 import { Controller } from 'react-hook-form'
+import conf from '../conf/conf'
 export default function RTC({name, control, label, defaultValue =''}) {
   return (
     <>
@@ -12,7 +13,7 @@ export default function RTC({name, control, label, defaultValue =''}) {
     control={control}
     render={({field: {onChange}})=>(
         <Editor
-        apiKey='odh8rd63s04razsy7h0q9cqwaq6tk2tou4q9wsbhuw531xv8'
+        apiKey={conf.appwriteVerselApi}
         initialValue={defaultValue}
         init={{
             initialValue: defaultValue,

@@ -14,12 +14,17 @@ import AllPost from './components/pages/AllPost.jsx'
 import EditPost from './components/pages/EditPost.jsx'
 import Post from './components/pages/Post.jsx'
 import AddPost from './components/pages/AddPost.jsx'
+import Home from './components/pages/Home.jsx'
 
 const router = createBrowserRouter([
     {
         path: '/',
         element : <App />,
         children: [
+            {
+                path : '/',
+                element :( <Home />)
+            },
             {
                 path: '/login',
                 element:(
@@ -39,10 +44,10 @@ const router = createBrowserRouter([
             {
                 path :'/all-posts',
                 element : (
-                    <AuthLayout authentication>
-                        {" "}
+                
+                        
                         <AllPost />
-                    </AuthLayout>
+                 
                 ),
                 children : [
                     
@@ -71,6 +76,10 @@ const router = createBrowserRouter([
                 path: "/all-posts/post/:slug",
                 element: <Post />,
             },
+            {
+                path: "/post/:slug",
+                element: <Post />,
+            }
         ]
     }
 ])
