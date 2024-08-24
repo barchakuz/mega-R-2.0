@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Slider from 'react-slick'; // Import react-slick
+import Slider from 'react-slick';
 import service from '../../../appwrite/confg';
 import { Container, PostCard } from '../index';
 import "slick-carousel/slick/slick.css"; 
@@ -10,22 +10,20 @@ function Home() {
     
     useEffect(() => {
         service.getPosts().then((data) => {
-            console.log(data);
             if (data) {
                 setPosts(data.documents);
             }
         });
     }, []);
 
-    // Slider settings for full-width slides
     const settings = {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: 1, // Show one slide at a time
-        slidesToScroll: 1, // Scroll one slide at a time
-        autoplay: true, // Auto-scroll feature
-        autoplaySpeed: 3000, // Auto-scroll speed in milliseconds
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000,
     };
 
     if (posts.length === 0) {
@@ -47,14 +45,18 @@ function Home() {
     return (
         <div className='w-full py-8'>
             <Container>
-              
-                <div className="flex justify-center">
-                    <div className="w-full max-w-xl"> {/* Limit slider width to center it */}
+                <div className="flex justify-center mx-3">
+                    <div className="w-full max-w-screen-lg"> 
                         <Slider {...settings}>
-                            {posts.slice(0, 6).map((post) => ( // Showing the first 6 posts in the slider
-                                <div key={post.$id} className='w-full flex justify-center'>
-                                    <div className='max-w-xs max-h-500'> {/* Limit image container to 500px */}
-                                        <PostCard {...post} />
+                            {posts.slice(0, 6).map((post) => ( 
+                                <div key={post.$id} className='flex justify-center items-center'>
+                                    <div className='w-full max-w-md'>
+                                        <img 
+                                            src={service.getFilePreview(post.featuredImage)} 
+                                            alt={post.title} 
+                                            className="rounded-xl object-cover w-full h-56 mx-auto bg-slate-500"
+                                        />
+                                        <h1 className='text-center mt-2 text-lg'>{post.title}</h1>
                                     </div>
                                 </div>
                             ))}

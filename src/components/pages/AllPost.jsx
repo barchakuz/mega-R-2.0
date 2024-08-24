@@ -28,6 +28,7 @@ function AllPost() {
                     {posts.length > 0 ? (
                         posts.map((post) => (
                             <div key={post.$id} className='p-2 w-1/4'>
+                             
                                 <PostCard  {...post} />
                             </div>
                         ))
